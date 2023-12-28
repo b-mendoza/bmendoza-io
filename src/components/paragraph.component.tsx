@@ -1,6 +1,4 @@
----
 import { cn } from '~/utils/cn';
-import type { HTMLAttributes } from 'astro/types';
 
 type Variant = 'body' | 'subtitle';
 
@@ -20,7 +18,7 @@ const hasVariant = (
   variant: Variant,
 ): variant is keyof typeof PARAGRAPH_VARIANTS => variant in PARAGRAPH_VARIANTS;
 
-type Props = HTMLAttributes<'p'> & {
+type ParagraphProps = React.JSX.IntrinsicElements['p'] & {
   /**
    * The variant of the paragraph to render.
    * @default 'md'
@@ -33,21 +31,25 @@ type Props = HTMLAttributes<'p'> & {
   variant?: Variant;
 };
 
-const {
-  class: className,
-  size = 'md',
-  variant = 'body',
-  ...restOfProps
-} = Astro.props;
+export const Paragraph = (props: ParagraphProps) => {
+  const {
+    children,
+    className,
+    size = 'md',
+    variant = 'body',
+    ...restOfProps
+  } = props;
 
-const variantClassName = hasVariant(variant)
-  ? PARAGRAPH_VARIANTS[variant]
-  : undefined;
----
-
-<p
-  class={cn(PARAGRAPH_SIZES[size], variantClassName, className)}
-  {...restOfProps}
->
-  <slot />
-</p>
+  return (
+    <p
+      className={cn(
+        PARAGRAPH_SIZES[size],
+        hasVariant(variant) ? PARAGRAPH_VARIANTS[variant] : undefined,
+        className,
+      )}
+      {...restOfProps}
+    >
+      {children}
+    </p>
+  );
+};
