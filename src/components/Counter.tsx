@@ -1,16 +1,11 @@
-type CounterProps = React.PropsWithChildren<{
-  count: number;
-}>;
-
 export const Counter = ({
   children,
-  count: initialCount,
-}: CounterProps): React.JSX.Element => {
+}: React.PropsWithChildren): React.JSX.Element => {
   return (
     <>
       <div className="counter">
         <button>-</button>
-        <pre>{initialCount}</pre>
+        <pre>0</pre>
         <button>+</button>
       </div>
 
