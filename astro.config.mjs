@@ -8,4 +8,8 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
+  image: {
+    domains: ['res.cloudinary.com'],
+    remotePatterns: [{ protocol: 'https' }],
+  },
 });
