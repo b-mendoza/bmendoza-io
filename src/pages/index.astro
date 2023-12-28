@@ -3,7 +3,7 @@ import '~/styles/fonts.styles.css';
 import '~/styles/globals.styles.css';
 import ExperienceCard from '~/components/experience-card.component.astro';
 import { Heading } from '~/components/heading.component.tsx';
-import Paragraph from '~/components/paragraph.component.astro';
+import { Paragraph } from '~/components/paragraph.component.tsx';
 import SectionWrapper from '~/components/section-wrapper.component.astro';
 import WhiteLink from '~/components/white-link.component.astro';
 import { getJobExperience } from '~/models/get-job-experience.model';
@@ -97,13 +97,13 @@ const SECTION_BACKGROUND =
 
     <main>
       <SectionWrapper class={SECTION_BACKGROUND}>
-        <Paragraph class="mb-12" variant="subtitle">About</Paragraph>
+        <Paragraph className="mb-12" variant="subtitle">About</Paragraph>
 
         <Heading className="mb-8 font-semibold" size="sm" variant="h1">
           Senior Software Engineer
         </Heading>
 
-        <Paragraph class="mb-16 text-balance">
+        <Paragraph className="mb-16 text-balance">
           I am a highly skilled developer with 6 years of experience building
           high-quality applications for small and medium-sized businesses. I am
           passionate about creating exceptional user experiences and ensuring
@@ -157,7 +157,7 @@ const SECTION_BACKGROUND =
         src={footerImgAttributes.src}
       />
 
-      <Paragraph class="mb-6 text-center text-white/80">
+      <Paragraph className="mb-6 text-center text-white/80">
         Bryan Mendoza
       </Paragraph>
 
