@@ -1,9 +1,51 @@
 ---
 import '~/styles/fonts.styles.css';
 import '~/styles/globals.styles.css';
-import { Counter } from '../components/Counter';
+import ExperienceCard from '~/components/experience-card.component.astro';
+import { Heading } from '~/components/heading.component.tsx';
+import Paragraph from '~/components/paragraph.component.astro';
+import SectionWrapper from '~/components/section-wrapper.component.astro';
+import WhiteLink from '~/components/white-link.component.astro';
+import { getJobExperience } from '~/models/get-job-experience.model';
+import { getTags } from '~/models/get-tags.model';
+import { cn } from '~/utils/cn';
+import { getImage } from 'astro:assets';
+
+const PFP_IMG_SIZE = {
+  height: 40,
+  width: 40,
+} as const;
+
+const FOOTER_IMAGE_SIZE = {
+  height: 115,
+  width: 115,
+} as const;
+
+const pfpImgAttributes = await getImage({
+  src: {
+    format: 'webp',
+    src: `https://res.cloudinary.com/dgqif0kkr/image/upload/q_auto,w_${PFP_IMG_SIZE.width},h_${PFP_IMG_SIZE.height},c_lfill,f_auto/bmendoza-io/shiba-inu.jpg`,
+    ...PFP_IMG_SIZE,
+  },
+});
+
+const footerImgAttributes = await getImage({
+  src: {
+    format: 'webp',
+    src: `https://res.cloudinary.com/dgqif0kkr/image/upload/q_auto,w_${FOOTER_IMAGE_SIZE.width},h_${FOOTER_IMAGE_SIZE.height},c_lfill,f_auto/bmendoza-io/shiba-inu.jpg`,
+    ...FOOTER_IMAGE_SIZE,
+  },
+});
+
+const tags = getTags();
+
+const jobExperiences = getJobExperience();
+
+const SECTION_BACKGROUND =
+  'bg-gradient-to-tr from-section-background-bottom to-section-background-top';
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <link
@@ -13,17 +55,129 @@ import { Counter } from '../components/Counter';
       type="font/woff2"
       crossorigin="anonymous"
     />
+    <link
+      rel="preload"
+      as="image"
+      href={pfpImgAttributes.src}
+      fetchpriority="high"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
 
-  <body>
+  <body
+    class="mx-auto min-h-screen max-w-[68rem] bg-background text-white antialiased"
+  >
+    <header
+      class={cn(
+        'mx-4 my-4 rounded-[2rem] border-[0.1rem] border-solid border-section-border/10 px-8 py-16',
+        'sticky top-4 flex items-center justify-between gap-6 rounded-2xl py-6',
+        SECTION_BACKGROUND,
+      )}
+    >
+      <img
+        {...PFP_IMG_SIZE}
+        alt="a person holding a dog in front of a mirror with his head tilted to the side and his eyes wide open"
+        class="rounded-full"
+        fetchpriority="high"
+        loading="eager"
+        src={pfpImgAttributes.src}
+      />
+
+      <Heading
+        className="mr-auto text-[2rem] font-medium"
+        size="sm"
+        variant="h2"
+      >
+        Bryan Mendoza
+      </Heading>
+    </header>
+
     <main>
-      <Counter>
-        <h1>Hello, React!</h1>
-      </Counter>
+      <SectionWrapper class={SECTION_BACKGROUND}>
+        <Paragraph class="mb-12" variant="subtitle">About</Paragraph>
+
+        <Heading className="mb-8 font-semibold" size="sm" variant="h1">
+          Senior Software Engineer
+        </Heading>
+
+        <Paragraph class="mb-16 text-balance">
+          I am a highly skilled developer with 6 years of experience building
+          high-quality applications for small and medium-sized businesses. I am
+          passionate about creating exceptional user experiences and ensuring
+          accessibility with expertise in modern tools like React, Next.js, and
+          Remix.
+        </Paragraph>
+
+        <ul class="flex flex-wrap gap-[0.8rem]">
+          {
+            tags.map((tag) => {
+              return (
+                <li class="flex h-12 items-center gap-2 rounded-[2rem] bg-block-background-1/[0.15] px-4 py-[0.4rem]">
+                  <Paragraph size="sm">{tag.text}</Paragraph>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </SectionWrapper>
+
+      <SectionWrapper
+        class={cn('flex flex-col gap-[3.6rem]', SECTION_BACKGROUND)}
+      >
+        <Paragraph variant="subtitle">Experience</Paragraph>
+
+        {
+          jobExperiences.map((jobExperience) => (
+            <ExperienceCard
+              companyName={jobExperience.companyName}
+              description={jobExperience.description}
+              jobTitle={jobExperience.jobTitle}
+              timePeriod={jobExperience.timePeriod}
+            />
+          ))
+        }
+      </SectionWrapper>
     </main>
+
+    <footer
+      class={cn(
+        'mx-4 my-4 rounded-[2rem] border-[0.1rem] border-solid border-section-border/10 px-8 py-16',
+        'border-white/20 bg-gradient-to-bl from-[hsl(243_100%_68%)] to-[hsl(243_76%_51%)] px-0',
+      )}
+    >
+      <img
+        {...FOOTER_IMAGE_SIZE}
+        alt="a person holding a dog in front of a mirror with his head tilted to the side and his eyes wide open"
+        class="mx-auto mb-10 rounded-full"
+        loading="lazy"
+        decoding="async"
+        src={footerImgAttributes.src}
+      />
+
+      <Paragraph class="mb-6 text-center text-white/80">
+        Bryan Mendoza
+      </Paragraph>
+
+      <div class="mx-8 mb-12">
+        <Heading
+          className="mb-12 text-balance text-center font-medium"
+          size="lg"
+          variant="h2"
+        >
+          Let&apos;s talk about your project
+        </Heading>
+
+        <WhiteLink
+          class="flex w-full items-center justify-center"
+          isExternal
+          href="https://calendly.com/bmendoza-dev/30-minute-chat-with-bryan-mendoza"
+        >
+          Book a call
+        </WhiteLink>
+      </div>
+    </footer>
   </body>
 </html>
