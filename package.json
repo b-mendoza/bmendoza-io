@@ -10,14 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "0.3.4",
     "@astrojs/react": "3.0.9",
-    "@types/react": "18.2.45",
-    "@types/react-dom": "18.2.18",
     "astro": "4.0.8",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.3.3"
+    "react-dom": "18.2.0"
   },
   "engines": {
     "node": ">=20.10.0 <21.0.0"
@@ -25,5 +21,11 @@
   "volta": {
     "node": "20.10.0",
     "pnpm": "8.13.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.3.4",
+    "@types/react": "18.2.45",
+    "@types/react-dom": "18.2.18",
+    "typescript": "5.3.3"
   }
 }
