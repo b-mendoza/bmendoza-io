@@ -1,0 +1,19 @@
+---
+import { cn } from '~/utils/cn';
+import { BaseLink } from './base-link.component.tsx';
+import type { BaseLinkProps } from './base-link.component.tsx';
+
+type Props = Omit<BaseLinkProps, 'children'>;
+
+const { className, ...restOfProps } = Astro.props;
+---
+
+<BaseLink
+  className={cn(
+    'px-6 py-[0.4rem] text-white hover:rounded-[2rem] hover:bg-white/10 focus-visible:rounded-[2rem] focus-visible:bg-white/10',
+    className,
+  )}
+  {...restOfProps}
+>
+  <slot />
+</BaseLink>
