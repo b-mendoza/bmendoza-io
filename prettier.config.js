@@ -5,6 +5,7 @@ export default {
     'prettier-plugin-packagejson',
     '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-astro',
+    'prettier-plugin-tailwindcss',
   ],
   overrides: [
     {
