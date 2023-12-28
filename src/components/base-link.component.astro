@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+const EXTERNAL_LINK_PROPS = {
+  rel: 'noopener noreferrer',
+  target: '_blank',
+} satisfies Pick<HTMLAttributes<'a'>, 'rel' | 'target'>;
+
+type Props = HTMLAttributes<'a'> & {
+  /**
+   * @default false
+   */
+  isExternal?: boolean;
+};
+
+const { isExternal = false, ...restOfProps } = Astro.props;
+---
+
+<a {...isExternal ? EXTERNAL_LINK_PROPS : null} {...restOfProps}>
+  <span>
+    <slot />
+  </span>
+</a>
