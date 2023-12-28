@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "baseUrl": "./",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "moduleDetection": "force",
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
   "extends": "astro/tsconfigs/strictest"
 }
