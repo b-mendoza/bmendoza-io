@@ -1,0 +1,23 @@
+---
+import type { JobExperience } from '~/models/get-job-experience.model';
+import { Heading } from './heading.component';
+import Paragraph from './paragraph.component.astro';
+
+type Props = JobExperience;
+
+const { companyName, description, jobTitle, timePeriod } = Astro.props;
+---
+
+<article>
+  <Paragraph class="mb-8 text-texts/70">{timePeriod}</Paragraph>
+
+  <Heading variant="h2" size="sm" className="mb-[0.2rem] font-medium">
+    {companyName}
+  </Heading>
+
+  <Paragraph class="mb-8 text-texts/50">{jobTitle}</Paragraph>
+
+  <Paragraph class="whitespace-pre-wrap text-pretty">
+    {description}
+  </Paragraph>
+</article>
