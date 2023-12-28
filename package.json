@@ -1,26 +1,21 @@
 {
   "name": "bmendoza-io",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "astro": "astro",
     "build": "astro check && astro build",
+    "dev": "astro dev",
+    "fix:prettier": "prettier --ignore-unknown --cache --write .",
+    "lint:prettier": "prettier --ignore-unknown --cache --check .",
     "preview": "astro preview",
-    "astro": "astro"
+    "start": "astro dev"
   },
   "dependencies": {
     "@astrojs/react": "3.0.9",
     "astro": "4.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0"
-  },
-  "engines": {
-    "node": ">=20.10.0 <21.0.0"
-  },
-  "volta": {
-    "node": "20.10.0",
-    "pnpm": "8.13.1"
   },
   "devDependencies": {
     "@astrojs/check": "0.3.4",
@@ -31,5 +26,12 @@
     "prettier-plugin-astro": "0.12.3",
     "prettier-plugin-packagejson": "2.4.8",
     "typescript": "5.3.3"
+  },
+  "engines": {
+    "node": ">=20.10.0 <21.0.0"
+  },
+  "volta": {
+    "node": "20.10.0",
+    "pnpm": "8.13.1"
   }
 }
