@@ -3,10 +3,12 @@ import '~/styles/fonts.styles.css';
 import '~/styles/globals.styles.css';
 import ExperienceCard from '~/components/experience-card.component.astro';
 import { Heading } from '~/components/heading.component.tsx';
+import Link from '~/components/link.component.astro';
 import { Paragraph } from '~/components/paragraph.component.tsx';
 import SectionWrapper from '~/components/section-wrapper.component.astro';
 import WhiteLink from '~/components/white-link.component.astro';
 import { getJobExperience } from '~/models/get-job-experience.model';
+import { getSocialLinks } from '~/models/get-social-links.model';
 import { getTags } from '~/models/get-tags.model';
 import { cn } from '~/utils/cn';
 import { getImage } from 'astro:assets';
@@ -40,6 +42,8 @@ const footerImgAttributes = await getImage({
 const tags = getTags();
 
 const jobExperiences = getJobExperience();
+
+const socialLinks = getSocialLinks();
 
 const SECTION_BACKGROUND =
   'bg-gradient-to-tr from-section-background-bottom to-section-background-top';
@@ -178,6 +182,20 @@ const SECTION_BACKGROUND =
           Book a call
         </WhiteLink>
       </div>
+
+      <ul
+        class="flex flex-wrap items-center justify-center gap-12 border-t-[0.1rem] border-t-texts/[0.15] px-8 pt-12"
+      >
+        {
+          socialLinks.map((socialLink) => (
+            <li>
+              <Link isExternal href={socialLink.to}>
+                {socialLink.name}
+              </Link>
+            </li>
+          ))
+        }
+      </ul>
     </footer>
   </body>
 </html>
