@@ -1,9 +1,17 @@
 ---
+import '~/styles/fonts.styles.css';
 import { Counter } from '../components/Counter';
 ---
 
 <html lang="en">
   <head>
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/inter-latin-wght-normal.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
