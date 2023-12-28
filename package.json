@@ -8,8 +8,7 @@
     "dev": "astro dev",
     "fix:prettier": "prettier --ignore-unknown --cache --write .",
     "lint:prettier": "prettier --ignore-unknown --cache --check .",
-    "preview": "astro preview",
-    "start": "astro dev"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/react": "3.0.9",
