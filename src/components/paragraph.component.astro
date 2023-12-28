@@ -1,0 +1,53 @@
+---
+import { cn } from '~/utils/cn';
+import type { HTMLAttributes } from 'astro/types';
+
+type Variant = 'body' | 'subtitle';
+
+type Size = 'sm' | 'md' | 'lg';
+
+export const PARAGRAPH_SIZES = {
+  sm: 'text-sm',
+  md: 'text-md',
+  lg: 'text-lg',
+} satisfies Record<Size, string>;
+
+export const PARAGRAPH_VARIANTS = {
+  subtitle: 'font-semibold uppercase',
+} satisfies Partial<Record<Variant, string>>;
+
+const hasVariant = (
+  variant: Variant,
+): variant is keyof typeof PARAGRAPH_VARIANTS => variant in PARAGRAPH_VARIANTS;
+
+type Props = HTMLAttributes<'p'> & {
+  /**
+   * The variant of the paragraph to render.
+   * @default 'md'
+   */
+  size?: Size;
+  /**
+   * The variant of the paragraph to render.
+   * @default 'body'
+   */
+  variant?: Variant;
+};
+
+const {
+  class: className,
+  size = 'md',
+  variant = 'body',
+  ...restOfProps
+} = Astro.props;
+
+const variantClassName = hasVariant(variant)
+  ? PARAGRAPH_VARIANTS[variant]
+  : undefined;
+---
+
+<p
+  class={cn(PARAGRAPH_SIZES[size], variantClassName, className)}
+  {...restOfProps}
+>
+  <slot />
+</p>
