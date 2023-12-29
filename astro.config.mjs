@@ -1,3 +1,4 @@
+import cloudflare from '@astrojs/cloudflare';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
@@ -13,6 +14,11 @@ export default defineConfig({
   image: {
     domains: ['res.cloudinary.com'],
     remotePatterns: [{ protocol: 'https' }],
+    service: {
+      entrypoint: 'astro/assets/services/noop',
+    },
   },
   prefetch: true,
+  adapter: cloudflare(),
+  output: 'server',
 });
