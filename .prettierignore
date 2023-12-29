@@ -1,7 +1,9 @@
 # build output
 dist/
-# generated types
-.astro/
+# artifacts
+/.astro
+/.wrangler
+/functions
 
 # dependencies
 node_modules/

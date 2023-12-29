@@ -18,7 +18,9 @@ export default defineConfig({
       entrypoint: 'astro/assets/services/noop',
     },
   },
-  prefetch: true,
-  adapter: cloudflare(),
-  output: 'server',
+  adapter: cloudflare({
+    mode: 'directory',
+    imageService: 'passthrough',
+  }),
+  output: 'hybrid',
 });
